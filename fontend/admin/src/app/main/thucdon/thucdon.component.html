@@ -1,0 +1,109 @@
+<p-toast></p-toast>
+<div *ngIf="loading" class="loading">
+    <div class="icon icon--64"></div>
+</div>
+<div class="panel panel-flat" style="height:100%;overflow: scroll;" (load)="search()">
+    <div class="panel-heading">
+        <h5 class="panel-title">Thực đơn</h5>
+        <button type="button" class="btn bg-teal-400 btn-labeled" data-toggle="modal" data-target="#modal_default"
+            (click)="aloadd()"><b><i class=" icon-plus3"></i></b>Thêm mới</button>
+        <div class="heading-elements">
+            <button class="reload" (click)="reload()">
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ảnh</th>
+                    <th>Tên món</th>
+                    <th>Mô tả</th>
+                    <th>Giá món ăn</th>
+                    <th>Trạng thái</th>
+                    <th class="text-center" style="width: 30px;"><i class="icon-menu-open2"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let b of alo2">
+                    <td><img src="{{link+b.anh}}" alt="Món ăn"></td>
+                    <td>{{b.ten}}</td>
+                    <td>{{b.mota}}</td>
+                    <td>{{b.gia|number}} VNĐ</td>
+                    <td>
+                        <div *ngIf="b.trangthai==1; else elseBlock">
+                            <span class="label label-success">Hoạt động</span>
+                        </div>
+                        <ng-template #elseBlock>
+                            <span class="label label-warning">Bị chặn</span></ng-template>
+                    </td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li (click)="aloget(b.id)"><a href="#" data-toggle="modal"
+                                            data-target="#modal_default"><i class=" icon-pencil7"></i> Sửa</a></li>
+                                    <li *ngIf="b.trangthai==1;">
+                                        <a href="#" (click)="delte(b.id)"><i class=" icon-user-block"></i> Chặn</a>
+                                    </li>
+                                    <li *ngIf="b.trangthai1;">
+                                        <a href="#" (click)="redelte(b.id)"><i class="icon-user-plus"></i>Bỏ chặn</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12" style="text-align: right;">
+        <!-- <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination> -->
+        <p-paginator [rows]="size" [totalRecords]="totalRecords" (onPageChange)="loadPage($event)"></p-paginator>
+    </div>
+</div>
+<form [formGroup]="frma" (ngSubmit)="save(frma.value)" id="modal_default" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">{{namemodel}}</h5>
+            </div>
+
+            <div class="modal-body">
+                <div *ngIf="so.invalid && (so.dirty || so.touched);else elseBlock2 ">
+                    <label style="color: red;" title="Không được rỗng">Tên xe*</label>
+                    <input style="border-color: red; border-radius: 6px;" title="Không được rỗng" class="form-control"
+                        type="text" formControlName="txt_ten">
+                </div>
+                <ng-template #elseBlock2>
+                    <label>Tên món ăn</label>
+                    <input class="form-control" style="border-radius: 6px;" type="text"
+                        formControlName="txt_ten"></ng-template>
+                <label>giá</label>
+                <div class="p-inputgroup">
+                    <input class="form-control" formControlName="txt_gia" type="number" pInputText placeholder="Giá">
+                    <span class="p-inputgroup-addon">VNĐ</span>
+                </div>
+                <label>Mô tả</label>
+                <div>
+                    <textarea name="" id="" rows="5" formControlName="txt_mota"
+                        style="resize: none;width: 100%;border-radius: 6px;border: 1px solid #ddd;padding-left: 12px;"></textarea>
+                </div>
+                <label>Ảnh món ăn</label>
+                <div>
+                    <input type="file" name="file" id="file" class="inputfile" (change)="file($event)"/>
+                    <label for="file">{{anh}}</label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</form>

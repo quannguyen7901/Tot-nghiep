@@ -1,0 +1,43 @@
+<link href="/assets/css/login.css" rel="stylesheet" type="text/css">
+<p-toast></p-toast>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+                <div class="card-body p-4 p-sm-5">
+                    <h1 class="card-title text-center mb-5 fw-light fs-5" style="font-weight: 600;font-size: 36px;">Đăng nhập</h1>
+                    <form [formGroup]="frmLogin" (ngSubmit)="Login(frmLogin.value)">
+                        <div *ngIf="taikhoan.invalid && (taikhoan.dirty || taikhoan.touched)">
+                            <span style="color:red ;" *ngIf="taikhoan.errors?.['required']">Tài khoản không được
+                                rỗng</span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" formControlName="txt_taikhoan" pInputText style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;" placeholder="Tài khoản">
+                        </div>
+                        <div *ngIf="matkhau.invalid && (matkhau.dirty || matkhau.touched)">
+                            <span style="color:red ;" *ngIf="matkhau.errors?.['required']">Mật khẩu không được
+                                rỗng</span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" formControlName="txt_matkhau" placeholder="Mật khẩu" pInputText style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;">
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                            <label class="form-check-label" for="rememberPasswordCheck">
+                                Nhớ mật khẩu
+                            </label>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold" style="width:100%" [disabled]="frmLogin.invalid" type="submit">Đăng nhập</button>
+                        </div>
+                        <hr class="my-4">
+                        <div class="d-grid">
+                            <a [routerLink]="['/dk']" style="margin: auto;">Đăng ký tài khoản mới</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

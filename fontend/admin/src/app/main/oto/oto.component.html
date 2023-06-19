@@ -1,0 +1,90 @@
+<p-toast></p-toast>
+<div class="panel panel-flat" style="height:530px;overflow: scroll;" (load)="search()">
+    <div class="panel-heading">
+        <h5 class="panel-title">Hóa đơn</h5>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="reload"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tên khách hàng</th>
+                    <th>Ngày lập</th>
+                    <th>Đặt cọc</th>
+                    <th>Tổng hóa đơn</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let b of alo2">
+                    <td>{{b.ten}}</td>
+                    <td>{{b.ngay}}</td>
+                    <td>{{b.coc|number}} VNĐ</td>
+                    <td>{{b.tien|number}} VNĐ</td>
+                    <td>
+                        <div *ngIf="b.tt==0; else elseBlock">
+                            <span class="label label-success">Đã thanh toán</span>
+                        </div>
+                        <ng-template #elseBlock>
+                            <span class="label label-warning">Chưa thanh toán</span></ng-template>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12" style="text-align: right;">
+        <!-- <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination> -->
+        <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="loadPage($event)"></p-paginator>
+    </div>
+</div>
+<!-- <form [formGroup]="frma" (ngSubmit)="save(frma.value)" id="modal_default" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">{{namemodel}}</h5>
+            </div>
+
+            <div class="modal-body">
+                <div *ngIf="so.invalid && (so.dirty || so.touched);else elseBlock2 ">
+                    <label style="color: red;" title="Không được rỗng">Tên xe*</label>
+                    <input style="border-color: red; border-radius: 6px;" title="Không được rỗng" class="form-control"
+                        type="text" formControlName="txt_ten">
+                </div>
+                <ng-template #elseBlock2>
+                    <label>Tên xe</label>
+                    <input class="form-control" style="border-radius: 6px;" type="text"
+                        formControlName="txt_ten"></ng-template>
+                <label>Màu xe</label>
+                <input class="form-control" style="border-radius: 6px;" type="email" formControlName="txt_mau">
+                <label>Hãng xe</label>
+                <input class="form-control" style="border-radius: 6px;" type="email" formControlName="txt_hang">
+                <label>Loại xe</label>
+                <select class="select" style="border-radius: 6px;" id="lp" formControlName="txt_loai">
+                        <option value="Xe thể thao">Xe thể thao</option>
+                        <option value="Xe 4 chỗ">Xe 4 chỗ</option>
+                        <option value="Xe 7 chỗ">Xe 7 chỗ</option>
+                        <option value="Xe 16 chỗ">Xe 16 chỗ</option>
+                        <option value="Xe 32 chỗ">Xe 32 chỗ</option>
+                </select>
+                <label>giá</label>
+                <div class="p-inputgroup">
+                    <input class="form-control" formControlName="txt_gia" type="number" pInputText placeholder="Giá">
+                    <span class="p-inputgroup-addon">VNĐ</span>
+                </div>
+                
+                <!-- <label>Mô tả</label>
+                <p-editor formControlName="txt_mota" [style]="{'height':'250px','border-radius':'6px'}"></p-editor> -->
+            <!-- </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</form> --> -->

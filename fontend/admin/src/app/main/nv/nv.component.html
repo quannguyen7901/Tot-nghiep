@@ -1,0 +1,119 @@
+<p-toast></p-toast>
+<div *ngIf="loading" class="loading">
+    <div class="icon icon--64"></div>
+</div>
+<div class="panel panel-flat" style="height:530px;overflow: scroll;" (load)="search()">
+    <div class="panel-heading">
+        <h5 class="panel-title">Nhân viên</h5>
+        <button type="button" class="btn bg-teal-400 btn-labeled" data-toggle="modal" data-target="#modal_default"
+            (click)="aloadd()"><b><i class=" icon-plus3"></i></b>Thêm mới</button>
+        <div class="heading-elements">
+            <button class="reload" (click)="reload()">
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Họ và tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Chức vụ</th>
+                    <th>Quê quán</th>
+                    <th>Trạng thái</th>
+                    <th class="text-center" style="width: 30px;"><i class="icon-menu-open2"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of alo">
+                    <td>{{a.hoten}}</td>
+                    <td>0{{a.sdt}}</td>
+                    <td>{{a.email}}</td>
+                    <td>{{a.chucvu}}</td>
+                    <td>{{a.quequan}}</td>
+                    <td>
+                        <div *ngIf="a.trangthai==1; else elseBlock">
+                            <span class="label label-success">Hoạt động</span>
+                        </div>
+                        <ng-template #elseBlock>
+                            <span class="label label-warning">Bị chặn</span></ng-template>
+                    </td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li (click)="aloget(a.id)"><a href="#" data-toggle="modal"
+                                            data-target="#modal_default"><i class=" icon-pencil7"></i> Sửa</a></li>
+                                    <li *ngIf="a.trangthai==1;">
+                                        <a href="#" (click)="delte(a.id)"><i class=" icon-user-block"></i> Chặn</a>
+                                    </li>
+                                    <li *ngIf="a.trangthai!=1;">
+                                        <a href="#" (click)="redelte(a.id)"><i class="icon-user-plus"></i>Bỏ chặn</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12" style="text-align: right;">
+        <!-- <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination> -->
+        <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="loadPage($event)"></p-paginator>
+    </div>
+</div>
+<form [formGroup]="frma" (ngSubmit)="save(frma.value)" id="modal_default" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">{{namemodel}}</h5>
+            </div>
+
+            <div class="modal-body" style="display: flex;justify-content: center;">
+                <!-- <p> <input formControlName="username" type="text" name="u" class="form-control"> </p>
+                <p> <input formControlName="password" type="password" name="u" class="form-control"></p>
+                <input class="form-control" name="u" type="text" formControlName="txt_ten"> -->
+                <div class="left" style="flex-grow: 1; padding: 10px;">
+                    <div *ngIf="ten.invalid && (ten.dirty || ten.touched);else elseBlock2 ">
+                        <label style="color: red;" title="Không được rỗng">Họ và tên*</label>
+                        <input style="border-color: red;" title="Không được rỗng" class="form-control" name="u"
+                            type="text" formControlName="txt_ten">
+                    </div>
+                    <ng-template #elseBlock2>
+                        <label>Họ và tên</label>
+                        <input class="form-control" name="u" type="text" formControlName="txt_ten"></ng-template>
+                    <label>Email</label>
+                    <input class="form-control" type="email" formControlName="txt_email">
+                    <label>Chức vụ</label>
+                    <input class="form-control" type="text" formControlName="txt_chucvu">
+
+                </div>
+                <div class="right" style="flex-grow: 1;padding: 10px">
+                    <div *ngIf="sdt.invalid && (sdt.dirty || sdt.touched);else elseBlock3 ">
+                        <label style="color: red;" title="Không được rỗng">Số điện thoại*</label>
+                        <input style="border-color: red;" title="Không được rỗng" class="form-control" name="u"
+                            type="text" formControlName="txt_sdt">
+                    </div>
+                    <ng-template #elseBlock3>
+                        <label>Số điện thoại</label>
+                        <input class="form-control" type="text" formControlName="txt_sdt"></ng-template>
+                    <label>Quê quán</label>
+                    <input class="form-control" type="text" formControlName="txt_quequan">
+                    <label>Số căn cước công dân</label>
+                    <input class="form-control" type="text" formControlName="txt_cccd">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</form>

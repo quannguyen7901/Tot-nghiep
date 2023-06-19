@@ -1,0 +1,129 @@
+<p-toast></p-toast>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-9 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+                <div class="card-body p-4 p-sm-5">
+                    <h1 class="card-title text-center mb-5 fw-light fs-5" style="font-weight: 600;font-size: 36px;">Đăng
+                        ký</h1>
+                    <form [formGroup]="frmLogin" (submit)="dangky(frmLogin.value)">
+                        <div style="display: flex; gap: 8px;">
+
+                            <div style="width: 50%;">
+                                <div>
+                                    <label for="">Họ tên</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" formControlName="txt_hoten" pInputText
+                                        style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;"
+                                        placeholder="Tài khoản">
+                                </div>
+                                <div *ngIf="hoten.invalid && (hoten.dirty || hoten.touched)">
+                                    <span style="color:red ;" *ngIf="hoten.errors?.['required']">Họ tên không được
+                                        rỗng</span>
+                                </div>
+                                <div>
+                                    <label for="">Quê quán</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" formControlName="txt_quequan"
+                                        placeholder="Mật khẩu" pInputText
+                                        style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;">
+                                </div>
+                                <div *ngIf="quequan.invalid && (quequan.dirty || quequan.touched)">
+                                    <span style="color:red ;" *ngIf="quequan.errors?.['required']">Quê quán không được
+                                        rỗng</span>
+                                </div>
+                                <div>
+                                    <label for="">Số điện thại</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" formControlName="txt_sdt"
+                                        placeholder="Mật khẩu" pInputText
+                                        style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;">
+                                </div>
+                                <div>
+                                    <label for="">Số căn cước công dân</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" formControlName="txt_socccd" pInputText
+                                        style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;"
+                                        placeholder="Tài khoản">
+                                </div>
+                                <div *ngIf="cancuoc.invalid && (cancuoc.dirty || taikhoan.touched)">
+                                    <span style="color:red ;" *ngIf="taikhoan.errors?.['required']">Số căn cước công dân không được
+                                        rỗng</span>
+                                </div>
+                            </div>
+                            <div style="width: 50%;">
+                                <div>
+                                    <label for="">Email</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" formControlName="txt_email" pInputText
+                                        style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;"
+                                        placeholder="Tài khoản">
+                                </div>
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                                    <span style="color:red ;" *ngIf="email.errors?.['required']">Email không được
+                                        rỗng</span>
+                                </div>
+                                <div>
+                                    <label for="">Tài khoản</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" formControlName="txt_taikhoan" pInputText
+                                        style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;"
+                                        placeholder="Tài khoản">
+                                </div>
+                                <div *ngIf="taikhoan.invalid && (taikhoan.dirty || taikhoan.touched)">
+                                    <span style="color:red ;" *ngIf="taikhoan.errors?.['required']">Tài khoản không được
+                                        rỗng</span>
+                                </div>
+                                <div>
+                                    <label for="">Mật khẩu</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" formControlName="txt_matkhau"
+                                        placeholder="Mật khẩu" pInputText
+                                        style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;">
+                                </div>
+                                <div *ngIf="matkhau.invalid && (matkhau.dirty || matkhau.touched)">
+                                    <span style="color:red ;" *ngIf="matkhau.errors?.['required']">Mật khẩu không được
+                                        rỗng</span>
+                                </div>
+                                <div>
+                                    <label for="">Nhập lại mật khẩu</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" formControlName="txt_matkhau2"
+                                        placeholder="Mật khẩu" pInputText
+                                        style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold" style="width:100%"
+                                [disabled]="frmLogin.invalid" type="submit">Đăng ký</button>
+                        </div>
+                        <hr class="my-4">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="otpf" style="position: fixed; top:0;left:0;right:0;bottom: 0;background-color: antiquewhite;display: flex; justify-content: center;align-items: center; display: none;">
+    <div style="background-color: #fff; width:50%; height: 200px;padding: 24px;">
+        Nhập mã otp đã được gửi vào gmail
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="otp"
+                placeholder="Mật khẩu" pInputText
+                style="line-height: 30px;border: 1px solid black;padding: 5px;border-radius: 4px;">
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-login text-uppercase fw-bold" style="width:100%"
+             (click)="get()">Xác nhận</button>
+        </div>
+    </div>
+</div>

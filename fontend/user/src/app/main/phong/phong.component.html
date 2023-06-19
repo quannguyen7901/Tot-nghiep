@@ -1,0 +1,117 @@
+<p-toast></p-toast>
+<div class="container-xxl px-0 wow " data-wow-delay="0.1s" style="margin-bottom: 50px;height:350px;margin-top: 50px;">
+    <div class="row g-0">
+        <div class="col-md-6" style="height:350px">
+            <div class="video">
+                <button type="button" class="btn-play" data-bs-toggle="modal"
+                    data-src="https://www.youtube.com/embed/8AOs_Y4QXRE" data-bs-target="#videoModal">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6 bg-dark d-flex align-items-center">
+            <div class="p-5 wow " data-wow-delay="0.2s">
+                <h5 class="section-title ff-secondary text-start text-primary fw-normal">Đặt phòng</h5>
+                <h1 class="text-white mb-4">Đặt một phòng trực tuyến</h1>
+                <div>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="form-floating date" id="date3">
+                                <input class="form-control datetimepicker-input" style="padding-left:20px;"
+                                    name="daterange" type="text" id="tg" placeholder="Ngày nhận phòng - Ngày trả phòng"
+                                    readonly />
+                                <label for="email">Ngày nhận - trả phòng</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" (click)="value()">Tìm phòng ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngFor="let a of alo2" class="container-xxl py-10 px-0 wow fadeInUp" data-wow-delay="0.1s"
+    style="height:450px;margin-top: 10px;">
+    <div class="row g-0">
+        <div class="col-md-6">
+            <img src="{{link+a.t.duongdan}}" height="450" width="100%" alt="">
+        </div>
+        <div class="col-md-6 bg-dark d-flex align-items-center">
+            <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+                <h5 class="section-title ff-secondary text-start text-primary fw-normal">{{a.t.ten}}</h5>
+                <div style="margin-top: 5px;margin-left: 5px;color:orange;">
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+                <h1 class="text-white mb-4">Số phòng còn trống: {{a.num}} </h1>
+                <div>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            Giá: {{a.t.gia|number}} VNĐ 1 đêm
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Special Request" id="message"
+                                    style="height: 100px"></textarea>
+                                <label for="message">Ghi chú thêm</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" (click)="add(a.t.id,a.t.gia)">Chọn phòng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-2"
+    style="position: fixed;top:130px; right: 10px; background-color: #fff;padding: 16px; border: 1px solid #000000;width: 200px;">
+    <div style="color: #000000;">
+        <div class="col-md-12" style="display: flex;justify-content: space-between;">
+            Single Room: <span style="font-weight: 800;">{{loai1}}</span>
+        </div>
+        <div class="col-md-12" style="display: flex;justify-content: space-between;">
+            Twin Room: <span style="font-weight: 800;">{{loai2}}</span>
+        </div>
+        <div class="col-md-12" style="display: flex;justify-content: space-between;">
+            Double Room: <span style="font-weight: 800;">{{loai3}}</span>
+        </div>
+        <div class="col-md-12" style="display: flex;justify-content: space-between;">
+            Triple Room: <span style="font-weight: 800;">{{loai4}}</span>
+        </div>
+        <div class="col-md-12" style="display: flex;justify-content: space-between;">
+            Quad Room: <span style="font-weight: 800;">{{loai5}}</span>
+        </div>
+    </div>
+    <hr>
+    <div class="col-12" style="margin-top: 16px;">
+        Tổng cộng: <span style="font-weight: 800;">{{loai1+loai2+loai3+loai4+loai5}}</span> Phòng
+    </div>
+    <div class="col-12" style="margin-top: 16px;">
+        Giá: <span style="font-weight: 800;">{{gia|number}}</span> VNĐ
+    </div>
+    <div class="col-12" style="margin-top: 16px;">
+        <button class="btn btn-primary w-100 py-3" (click)="cocphong()">Đặt phòng</button>
+    </div>
+</div>
+
+<div class="col-12" style="background-color: #f7f7f77c;padding: 10px; position: fixed;top:0;left:0;right: 0;bottom: 0;display: flex;justify-content: center;align-items: center;z-index: 1000;" *ngIf="datcoc">
+    <div class="daialog" style=" width:600px;background-color: #fff;box-sizing: border-box;padding: 24px;border-radius:4px;">
+        <div class="daialog__head" style="display: flex;margin-bottom: 24px;">
+            <div class="daialog__name" style="font-size: 26px; font-weight: 700; flex-grow: 1;">Lưu ý</div>
+        </div>
+        <div class="daialog__content" style="font-size: 20px;margin-bottom: 24px;">
+            Bạn cần đặt cọc {{(gia/10)|number}} VNĐ để có thể đặt phòng
+        </div>
+        <div class="daialog__button" style="display: flex;justify-content: end; gap: 8px;">
+            <button class="btn btn-exit" style="width: 80px;border-radius: 4px; border: 1px solid #000000;" (click)="datcoc=false">Hủy</button>
+            <button class="btn btn-success py-3" style="width: 180px; border-radius: 4px;" (click)="datphong()">Đặt cọc</button>
+        </div>
+    </div>
+</div>

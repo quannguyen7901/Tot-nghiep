@@ -1,0 +1,80 @@
+<div class="login-container">
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+
+            <!-- Main content -->
+            <div class="content-wrapper">
+
+                <!-- Content area -->
+                <div class="content">
+
+                    <!-- Simple login form -->
+                    <form [formGroup]="frmLogin" (ngSubmit)="Login(frmLogin.value)">
+                        <div class="panel panel-body login-form">
+                            <div class="text-center">
+                                <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i>
+                                </div>
+                                <h5 class="content-group">ĐĂNG NHẬP</h5>
+                            </div>
+
+                            <div *ngIf="taikhoan.invalid && (taikhoan.dirty || taikhoan.touched)">
+                                <span style="color:red ;" *ngIf="taikhoan.errors?.['required']">Tài khoản không được
+                                    rỗng</span>
+                            </div>
+                            <div class="form-group has-feedback has-feedback-left">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                    <input type="text" formControlName="txt_taikhoan" pInputText [style]="{'outline':'hidden','border':'1.5px solid #e9ecef','width':'100%','line-height':'25px'}"
+                                        placeholder="Tài khoản">
+                                </div>
+                            </div>
+
+                            <div *ngIf="matkhau.invalid && (matkhau.dirty || matkhau.touched)">
+                                <span style="color:red ;" *ngIf="matkhau.errors?.['required']">Mật khẩu không được
+                                    rỗng</span>
+                            </div>
+                            <div class="form-group has-feedback has-feedback-left">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                                    <input formControlName="txt_matkhau" type="password" [style]="{'outline':'hidden','border':'1.5px solid #e9ecef','width':'100%','line-height':'25px'}"
+                                        pInputText placeholder="Mật khẩu">
+                                </div>
+                            </div>
+                            <div style="color:red ;" *ngIf="error">
+                                Tài khoản hoặc mật khẩu không đúng!
+                            </div>
+                            <div class="form-group">
+                                <button [disabled]="frmLogin.invalid" type="submit"
+                                    class="btn btn-primary btn-block">Đăng Nhập<i
+                                        class="icon-circle-right2 position-right"></i></button>
+                            </div>
+                            <div class="text-center">
+                                <a href="login_password_recover.html">Quyên mật khẩu?</a>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /simple login form -->
+
+
+                    <!-- Footer -->
+                    <div class="footer text-muted text-center">
+                        &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a
+                            href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+                    </div>
+                    <!-- /footer -->
+
+                </div>
+                <!-- /content area -->
+
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+
+    </div>
+    <!-- /page container -->
+</div>

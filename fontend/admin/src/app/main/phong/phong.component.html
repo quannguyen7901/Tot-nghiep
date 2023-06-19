@@ -1,0 +1,103 @@
+<p-toast></p-toast>
+<div class="panel panel-flat" style="height:530px;overflow: scroll;" (load)="search()">
+    <div class="panel-heading">
+        <h5 class="panel-title">Phòng khách sạn</h5>
+        <button type="button" class="btn bg-teal-400 btn-labeled" data-toggle="modal" data-target="#modal_default"
+            (click)="aloadd()"><b><i class=" icon-plus3"></i></b>Thêm mới</button>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="reload"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Số phòng</th>
+                    <th>Loại phòng</th>
+                    <th>Giá</th>
+                    <th>Trạng thái</th>
+                    <th class="text-center" style="width: 30px;"><i class="icon-menu-open2"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let b of alo2">
+                    <td>{{b.sophong}}</td>
+                    <td>{{b.tenloai}}</td>
+                    <td>{{b.gia|number}} VNĐ</td>
+                    <td>
+                        <div *ngIf="b.trangthai==1;">
+                            <span class="label label-success">Trống</span>
+                        </div>
+                        <div *ngIf="b.trangthai==2;">
+                            <span class="label label-warning">Có người</span>
+                        </div>
+                        <div *ngIf="b.trangthai==0;">
+                            <span class="label label-warning">Khóa</span>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li (click)="aloget(b.id)"><a href="#" data-toggle="modal"
+                                            data-target="#modal_default"><i class=" icon-pencil7"></i> Sửa</a></li>
+                                    <li *ngIf="b.trangthai==1;">
+                                        <a href="#" (click)="delte(b.id)"><i class=" icon-user-block"></i>Khóa</a>
+                                    </li>
+                                    <li *ngIf="b.trangthai==0;">
+                                        <a href="#" (click)="redelte(b.id)"><i class="icon-user-plus"></i>Mở khóa</a>
+                                    </li>
+                                    <!-- <li *ngIf="b.tt==2;">
+                                        <a href="#" (click)="redelte(b.id)" ><i class="icon-user-plus"></i>Mở khóa</a>
+                                    </li> -->
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12" style="text-align: right;">
+        <!-- <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination> -->
+        <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="loadPage($event)"></p-paginator>
+    </div>
+</div>
+<form [formGroup]="frma" (ngSubmit)="save(frma.value)" id="modal_default" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">{{namemodel}}</h5>
+            </div>
+
+            <div class="modal-body">
+                <div *ngIf="so.invalid && (so.dirty || so.touched);else elseBlock2 ">
+                    <label style="color: red;" title="Không được rỗng">Số phòng*</label>
+                    <input style="border-color: red; border-radius: 6px;" title="Không được rỗng" class="form-control"
+                        type="text" formControlName="txt_so">
+                </div>
+                <ng-template #elseBlock2>
+                    <label>Số phòng</label>
+                    <input class="form-control" style="border-radius: 6px;" type="text"
+                        formControlName="txt_so"></ng-template>
+                <!-- <label>idlp</label>
+                <input class="form-control" style="border-radius: 6px;" type="email" formControlName="txt_idlp"> -->
+                <label>Loại phòng</label>
+                <select class="select-search" id="lp" value="alo" formControlName="txt_idlp">
+                    <option *ngFor="let a of lp" value="{{a.id}}">{{a.tenloai}}</option>
+                </select>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</form>

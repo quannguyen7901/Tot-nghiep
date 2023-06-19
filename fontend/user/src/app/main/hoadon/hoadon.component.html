@@ -1,0 +1,54 @@
+<div style="height: calc(100vh - 470px);">
+    <h2 class="text-center">Hóa đơn dịch vụ</h2>
+    <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:30%">Dịch vụ </th>
+                    <th style="width:20%">Ngày đặt</th>
+                    <th style="width:35%" class="text-center">Thành tiền</th>
+                    <th style="width:15%"> Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="alo!=''">
+                <tr *ngFor="let item of alo">
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">Đặt phòng</h4>
+                                <p>Đặt phòng khách sạn</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-th="Price">{{item.ngaydat}}</td>
+                    <td data-th="Subtotal" class="text-center">{{item.tien|number}}</td>
+                    <td class="actions" data-th="" *ngIf="item.tt==1">
+                        <label class="btn-warning">Chưa thanh toán</label>
+                    </td>
+                    <td class="actions" data-th="" *ngIf="item.tt==2">
+                        <label class="btn-success">Đã thanh toán</label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <tbody *ngIf="alo==''">
+            <h1>Không có hóa đơn cần thanh toán</h1>
+        </tbody>
+        <hr>
+        <div style="display: flex;flex-direction: column;gap:12px;width: 300px;color: black;">
+            <div style="display: flex;justify-content: space-between;">
+                <label>Tổng hóa đơn: </label>
+                <label style="font-weight: 600;">{{sum|number}} VNĐ</label>
+            </div>
+            <div style="display: flex;justify-content: space-between;">
+                <label>Đặt cọc: </label>
+                <label style="font-weight: 600;">{{(sum/10)|number}} VNĐ</label>
+            </div>
+            <div style="display: flex;justify-content: space-between;">
+                <label>Phải trả: </label>
+                <label style="font-weight: 600;">{{(sum-(sum/10))|number}} VNĐ</label>
+            </div>
+            <button class="btn btn-success py-3" style="width: 100%; border-radius: 4px;" (click)="thanhtoan()">Thanh toán</button>
+        </div>
+    </div>
+</div>

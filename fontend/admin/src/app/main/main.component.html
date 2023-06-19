@@ -1,0 +1,19 @@
+ 
+<app-navbar></app-navbar>
+<!-- Page container -->
+<div class="page-container">
+    <!-- Page content -->
+    <div class="page-content" style="display: flex; height:calc(100vh - 48px)">
+        <div class="sidebar sidebar-main" style="display: flex;width:327px">
+            <app-sidebar></app-sidebar>
+        </div>
+        <!-- Main content -->
+        <div class="content-wrapper" style="display: block;position: relative;">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- /main content -->
+    </div>
+    <!-- /page content -->
+</div>
+
+<!-- /page container -->
